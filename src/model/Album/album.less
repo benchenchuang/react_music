@@ -1,0 +1,32 @@
+.album_wrapper{
+    padding: 0 15px;
+    .album_item{
+        display: block;
+        overflow: hidden;
+        margin: 15px 0;
+        .album_side{
+            float: left;
+            margin-right: 4vw;
+            width: 20vw;
+            height: 20vw;
+            & img{
+                width: 20vw;
+                height: 20vw;
+            }
+        }
+        .album_info{
+            margin-left: 24vw;
+            color: #888;
+            font-size: 14px;
+            line-height: 1.5;
+            .album_name{
+                width: 100%;
+                font-size: 16px;
+                color: #ddd;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+            }
+        }
+    }
+}

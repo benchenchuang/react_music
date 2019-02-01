@@ -1,0 +1,42 @@
+.radio_box{
+    padding: 0 2vw;
+    display: flex;
+    display: -webkit-flex;
+    overflow: hidden;
+    .radio_item{
+        flex: 1;
+        -webkit-flex:1;
+        padding: 0 2vw;
+        box-sizing: border-box;
+        overflow: hidden;
+        .radio_cover{
+            position: relative;
+            img{
+                width: 100%;
+            }
+            .iconfont{
+                position: absolute;
+                right: 2vw;
+                bottom: 2vw;
+                font-size: 8vw;
+            }
+        }
+        .radio_name{
+            font-size: 14px;
+            line-height: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .radio_pic{
+           width: 100%;
+           height: 40vw;
+           background: #333; 
+        }
+        .radio_title{
+            margin: 2vw 0;
+            height: 16px;
+            background: #333;
+        }
+    }
+}
