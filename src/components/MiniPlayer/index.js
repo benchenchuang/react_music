@@ -70,6 +70,9 @@ export default class MiniPlayer extends Component {
     handleNext(){
 
     }
+    handlePlayMode(){
+
+    }
     render() {
         this.currentIndex = this.props.currentIndex;
         // 从redux中获取当前播放歌曲
@@ -102,7 +105,18 @@ export default class MiniPlayer extends Component {
             imgStyle["animationPlayState"] = "paused";
         }
         let playButtonClass=this.state.playStatus===true?'iconfont icon-pause':'iconfont icon-play';
-
+        let playModeClass=null;
+        let currentPlayMode=this.state.currentPlayMode;
+        switch(currentPlayMode){
+            case 0:
+                playModeClass="iconfont icon-music_cycle";
+                break;
+            case 1:
+                playModeClass="iconfont icon-single_cycle";
+                break;
+            default:
+                playModeClass="iconfont icon-random";
+        }
         return (
             <div className="mini-player" style={playStyle}>
                 <div className="player-img rotate" style={imgStyle}>
@@ -113,8 +127,9 @@ export default class MiniPlayer extends Component {
                     <p className="singer">{song.singer}</p>
                 </div>
                 <div className="player-right">
+                    <i className={playModeClass} onClick={this.handlePlayMode.bind(this)}/>
                     <i className={playButtonClass} onClick={this.handlePlayOrPause.bind(this)}/>
-                    <i className="iconfont icon-next ml-10" onClick={this.handleNext.bind(this)}></i>
+                    <i className="iconfont icon-next" onClick={this.handleNext.bind(this)}></i>
                 </div>
                 <audio ref={(el) => { this.audioDOM = el; }}></audio>
             </div>
