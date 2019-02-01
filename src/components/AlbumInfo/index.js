@@ -25,12 +25,14 @@ export default class AlbumInfo extends Component {
                     let singer=item.singer.map(singer =>{
                         return singer.name;
                     });
-                    singer.join('/');
+                    let singerStr=singer.join(' / ');
+                    let songImg=`http://y.gtimg.cn/music/photo_new/T002R300x300M000${item.albummid}.jpg?max_age=2592000`;
                     let song={
                         id:item.songid,
                         name:item.songname,
-                        singer:singer,
-                        url:''
+                        singer:singerStr,
+                        url:'',
+                        img:songImg
                     }
                     this.getSongUrl(song,item.songmid);
                     songs.push(song)

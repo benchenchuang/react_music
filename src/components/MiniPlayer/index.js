@@ -6,6 +6,7 @@ export default class MiniPlayer extends Component {
         super(props);
         this.currentSong=[0,'','','',0];
         this.currentIndex=0;
+        this.isFirstPlay = true;
         //播放模式:list-列表； single-单曲; shuffle-随机 
         this.playModes=['list','single','shuffle'];
         this.state={
@@ -40,8 +41,28 @@ export default class MiniPlayer extends Component {
                 }
                 this.props.changeCurrentSong(this.props.playSongs[currentIndex]);
                 this.props.changeCurrentIndex(currentIndex)
+            }else{
+                if(this.props.playSongs.length===1){
+                    this.audioDOM.play();
+                }else{
+                    
+                    //暂停
+                    this.audioDOM.pause();
+                    this.setState({
+                        playProgress: 0,
+                        currentTime: 0,
+                        playStatus: false
+                    })
+                }
             }
-        })
+        });
+        this.audioDOM.addEventListener('error',()=>{alert('歌曲加载错误')});
+    }
+    componentDidUpdate(){
+        if(this.isFirstPlay===true){
+            this.audioDOM.play();
+            this.isFirstPlay=false;
+        }
     }
     handlePlayOrPause(){
 
@@ -50,8 +71,21 @@ export default class MiniPlayer extends Component {
 
     }
     render() {
-        let song=this.props.currentSong || {};
-        console.log(song)
+        this.currentIndex = this.props.currentIndex;
+        // 从redux中获取当前播放歌曲
+        if (this.props.currentSong && this.props.currentSong.url) {
+            // 当前歌曲发发生变化
+            if (this.currentSong.id !== this.props.currentSong.id) {
+                this.currentSong = this.props.currentSong;
+                if (this.audioDOM) {
+                    this.audioDOM.src = this.currentSong.url;
+                    // 加载资源，ios需要调用此方法
+                    this.audioDOM.load();
+                }
+            }
+        }
+        let song=this.currentSong;
+
         let playStyle={};
         if(this.props.showStatus===true){
             playStyle={display:"none"}
