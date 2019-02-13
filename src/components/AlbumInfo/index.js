@@ -71,6 +71,11 @@ export default class AlbumInfo extends Component {
             this.props.changeCurrentSong(song);
         }
     }
+    playAll(){
+        let songs=this.state.songs;
+        this.props.setSongs(songs);
+        this.props.changeCurrentSong(songs[0]);
+    }
     componentWillUnmount(){
         this.setState = (state,callback)=>{
             return;
@@ -91,7 +96,7 @@ export default class AlbumInfo extends Component {
                 <MusicHeader title={album.name} opacity={this.state.opacity}/>
                 <div className="music_cover">
                     <img width="100%" src={this.state.coverPic} alt={album.name}/>
-                    <div className="play-button">
+                    <div className="play-button" onClick={this.playAll.bind(this)}>
                         <i className="iconfont icon-play"></i>
                         <span>播放全部</span>
                     </div>

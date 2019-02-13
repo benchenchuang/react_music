@@ -40,7 +40,7 @@ export default class MiniPlayer extends Component {
                     currentIndex=parseInt(Math.random()*this.props.playSongs.length,10)
                 }
                 this.props.changeCurrentSong(this.props.playSongs[currentIndex]);
-                this.props.changeCurrentIndex(currentIndex)
+                this.currentIndex=currentIndex;
             }else{
                 if(this.props.playSongs.length===1){
                     this.audioDOM.play();
@@ -65,16 +65,49 @@ export default class MiniPlayer extends Component {
         }
     }
     handlePlayOrPause(){
-
+        if(this.props.playSongs.length){
+            let thisPlayStatus=this.state.playStatus;
+            thisPlayStatus ? (this.audioDOM.pause()) : this.audioDOM.play();
+            this.setState({
+                playStatus:!thisPlayStatus
+            })
+        }
     }
     handleNext(){
-
+        let songsLength=this.props.playSongs.length;
+        if(songsLength>1){
+            let currentIndex=this.currentIndex;
+            let thisPlayMode=this.state.currentPlayMode;
+            if(thisPlayMode===0){//列表播放
+                if(currentIndex===songsLength-1){
+                    currentIndex=0;
+                }else{
+                    currentIndex+=1;
+                }
+            }else if(thisPlayMode===1){//单曲循环
+                return false;
+            }else{//随机播放
+                let index=parseInt(Math.random()*songsLength);
+                currentIndex=index;
+            }
+            this.props.changeCurrentSong(this.props.playSongs[currentIndex]);
+            this.currentIndex=currentIndex;
+        }
     }
     handlePlayMode(){
-
+        let currentMode=this.state.currentPlayMode;
+        let modeLength=this.playModes.length;
+        if(currentMode===modeLength-1){
+            this.setState({
+                currentPlayMode:0
+            })
+        }else{
+            this.setState({
+                currentPlayMode:currentMode+1
+            })
+        }
     }
     render() {
-        this.currentIndex = this.props.currentIndex;
         // 从redux中获取当前播放歌曲
         if (this.props.currentSong && this.props.currentSong.url) {
             // 当前歌曲发发生变化

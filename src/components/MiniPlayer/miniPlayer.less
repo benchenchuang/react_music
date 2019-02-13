@@ -16,7 +16,19 @@
         /*border: 2px solid rgba(221, 221, 221, 0.3)*/
         border-radius: 50%;
         &.rotate{
-            animation: rotate 2s linear infinite;
+            animation: rotate 8s linear infinite;
+        }
+        
+        @keyframes rotate
+        {
+            from {transform:rotate(7deg);}
+            to {transform:rotate(360deg);}
+        }
+
+        @-webkit-keyframes rotate
+        {
+            from {transform:rotate(7deg);}
+            to {transform:rotate(360deg);}
         }
         img{
             width: 100%;

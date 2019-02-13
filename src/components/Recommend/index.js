@@ -51,12 +51,13 @@ export default class Recommend extends Component {
       }
     })
   }
+
   render() {
     let match=this.props;
     return (
       <div className="music-recommend">
         <Header />
-        <div className="recommend_wrapper">
+        <div className="recommend_wrapper" id="home_box">
           <div className="swiper-container">
             <div className="swiper-wrapper">
               {
