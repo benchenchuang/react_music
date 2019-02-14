@@ -3,7 +3,8 @@ import './App.less';
 import '../assets/style/font.css'
 import '../assets/style/reset.css'
 import Ranking from './Ranking'
-import Recommend from './Recommend'
+import Recommend from '../container/Recommend'
+import RankDetail from '../container/RankDetail'
 import Search from './Search'
 import AlbumInfo from '../container/albumInfo'
 import {BrowserRouter as Router,Redirect,Switch,Route} from 'react-router-dom'
@@ -16,11 +17,12 @@ class App extends Component {
           <div className="app">
               <Switch>
                 <Route exact path="/recommend" component={Recommend}/>
-                <Route path="/ranking" component={Ranking}/>
+                <Route exact path="/ranking" component={Ranking}/>
                 <Route path="/search" component={Search}/>
                 <Route path="/album/:id" component={AlbumInfo}/>
+                <Route path="/ranking/:id" component={RankDetail}/>
                 <Redirect from="/" to="/recommend"/>
-                <Route component={Search}/>
+                <Route component={Recommend}/>
               </Switch>
             <Player />
           </div>

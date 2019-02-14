@@ -53,7 +53,7 @@ export default class Recommend extends Component {
   }
 
   render() {
-    let match=this.props;
+    let {match}=this.props;
     return (
       <div className="music-recommend">
         <Header />

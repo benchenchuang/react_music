@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './album_info.less'
 import MusicHeader from '../../model/musicHeader'
 import {albumInfo,getSongKey} from '../../api/jsonp'
+import MusicCover from '../MusicCover'
 
 export default class AlbumInfo extends Component {
     constructor(props){
@@ -10,12 +11,10 @@ export default class AlbumInfo extends Component {
             album:{},
             songs:[],
             coverPic:'',
-            opacity:0,
             loading:false
         }
     }
     componentDidMount(){
-        window.addEventListener('scroll',this.bindScroll.bind(this));
         let albumId=this.props.match.params.id;
         albumInfo(albumId).then(res =>{
             if(res && res.code===0){
@@ -56,14 +55,6 @@ export default class AlbumInfo extends Component {
             }
         })
     }
-    bindScroll(event){
-        let scrollTop =event.srcElement.documentElement.scrollTop || event.srcElement.body.scrollTop;
-        let proportion=scrollTop/220;
-        let opacity=proportion>1?1:proportion;
-        this.setState({
-            opacity:opacity
-        });
-    };
     //选择歌曲
     selectSong(song){
         return (e)=>{
@@ -76,11 +67,6 @@ export default class AlbumInfo extends Component {
         this.props.setSongs(songs);
         this.props.changeCurrentSong(songs[0]);
     }
-    componentWillUnmount(){
-        this.setState = (state,callback)=>{
-            return;
-        };
-    }
     render() {
         let album=this.state.album;
         let songs=this.state.songs.map(song => {
@@ -91,16 +77,14 @@ export default class AlbumInfo extends Component {
                 </div>
             )
         })
+        let coverData={
+            'coverPic':this.state.coverPic,
+            'name':album.name
+        }
         return (
             <div>
-                <MusicHeader title={album.name} opacity={this.state.opacity}/>
-                <div className="music_cover">
-                    <img width="100%" src={this.state.coverPic} alt={album.name}/>
-                    <div className="play-button" onClick={this.playAll.bind(this)}>
-                        <i className="iconfont icon-play"></i>
-                        <span>播放全部</span>
-                    </div>
-                </div>
+                <MusicHeader title={album.name}/>
+                <MusicCover data={coverData} bindPlay={this.playAll.bind(this)}/>
 
                 <div className="album_container">
                     <div className="album_wrap">

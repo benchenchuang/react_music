@@ -56,7 +56,12 @@ export default class MiniPlayer extends Component {
                 }
             }
         });
-        this.audioDOM.addEventListener('error',()=>{alert('歌曲加载错误')});
+        this.audioDOM.addEventListener('error',()=>{
+            this.setState({
+                playStatus:false
+            })
+            alert('歌曲加载错误')
+        });
     }
     componentDidUpdate(){
         if(this.isFirstPlay===true){

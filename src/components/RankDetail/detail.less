@@ -1,0 +1,47 @@
+.song_box{
+    padding: 0 15px;
+    .songs_head{
+        margin: 10px 0;
+        font-size: 13px;
+        color: #aaa;
+    }
+    .songs .song_item{
+        margin: 15px 0;
+        display: flex;
+        display: -webkit-flex;
+        // justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        &:nth-child(1) .item_count{
+            color: coral;
+        }
+        &:nth-child(2) .item_count{
+            color: darkorange;
+        }
+        &:nth-child(3) .item_count{
+            color: lightcoral;
+        }
+        .item_count{
+            font-size: 14px;
+            margin-right: 5px;
+        }
+        .item_content{
+            flex: 1;
+            -webkit-flex:1;
+            p{
+                line-height: 1.4;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .name{
+                font-size: 14px;
+                color: #fff;
+            }
+            .singer{
+                font-size: 12px;
+                color: #aaa;
+            }
+        }
+    }
+}

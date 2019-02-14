@@ -20,3 +20,7 @@ export function removeSong(songId){
 export function setSongs(songs){
     return {type:ActionTypes.SET_SONGS,songs}
 };
+
+export function setScrollTop(top){
+    return {type:ActionTypes.SET_SCROLL_TOP,top}
+}

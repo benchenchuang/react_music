@@ -8,7 +8,8 @@ import * as ActionTypes from './actionTypes'
  const initialState={
     showStatus:false,//显示状态
     song:{},//当前歌曲
-    songs:[]//歌曲列表
+    songs:[],//歌曲列表,
+    scrollTop:0
  }
  //拆分reducer
  //显示或隐藏播放状态
@@ -43,11 +44,21 @@ function songs(songs=initialState.songs,action){
     }
 };
 
+function scrollTop(scrollTop=initialState.scrollTop,action){
+    switch(action.type){
+        case ActionTypes.SET_SCROLL_TOP:
+            return action.top;
+        default:
+            return scrollTop
+    }
+}
+
 //合并reducer
 const reducer=combineReducers({
     showStatus,
     song,
-    songs
+    songs,
+    scrollTop
 });
 
 export default reducer;
