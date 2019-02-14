@@ -57,8 +57,8 @@ export default class Recommend extends Component {
     return (
       <div className="music-recommend">
         <Header />
-        <div className="recommend_wrapper" id="home_box">
-          <div className="swiper-container">
+        <div className="recommend_wrapper">
+          <div className="swiper-container" style={{display:this.state.sliderList.length?'block':'none'}}>
             <div className="swiper-wrapper">
               {
                 this.state.sliderList.map(slider=>{
@@ -74,7 +74,9 @@ export default class Recommend extends Component {
             </div>
             <div className="swiper-pagination"></div>
           </div>
-          
+          {
+            !this.state.sliderList.length?(<div className="swiper_skeleton"></div>):''
+          }
           <div className="radio_container">
             <h2 className="album_head">推荐电台</h2>
             {
