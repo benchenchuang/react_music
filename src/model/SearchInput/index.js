@@ -31,6 +31,7 @@ export default class SearchInput extends Component {
         this.setState({
             keywords:''
         });
+        this.props.onBlurProps('');
     }
     setKeyWords(words){
         this.setState({
@@ -43,7 +44,7 @@ export default class SearchInput extends Component {
             <div>
                 <div className="search_form">
                     <i className="iconfont icon-search"></i>
-                    <input className="search_put" type="search" name="keywords" value={this.state.keywords} placeholder="搜索歌曲、歌手、专辑" onChange={this.onHandleChange.bind(this)} onBlur={this.onHandleSearch.bind(this)}/>
+                    <input className="search_put" type="search" name="keywords" value={this.state.keywords} placeholder="搜索歌曲、歌手、专辑" onChange={this.onHandleChange.bind(this)} onKeyUp={this.onHandleSearch.bind(this)}/>
                     {
                         this.state.keywords?(<span className="search_cancel" onClick={this.handleCancel.bind(this)}>取消</span>):""
                     }

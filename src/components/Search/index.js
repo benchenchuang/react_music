@@ -60,25 +60,32 @@ export default class Search extends Component {
         })
     }
 
+    setPlay(song){
+      this.props.setSongs([song]);
+      this.props.changeSong(song);
+    }
+
     render() {
       let {songs}=this.state;
       return (
         <div className="music-search">
           <Header />
           <SearchInput keyWords={this.state.keyWords} onBlurProps={this.getKeys.bind(this)}/>
-          {
-            songs.map(song=>{
-              return (
-                <div key={song.id}>
-                  <i className="iconfont icon-music"></i>
-                  <div className="song_detail">
-                    <p>{song.name}</p>
-                    <p>{song.singer}</p>
+          <div className="search_result" style={{display:this.state.keyWords?'block':'none'}}>
+            {
+              songs.map(song=>{
+                return (
+                  <div key={song.id} className="item" onClick={this.setPlay.bind(this,song)}>
+                    <i className="iconfont icon-music"></i>
+                    <div className="song_detail">
+                      <p className="name">{song.name}</p>
+                      <p className="singer">{song.singer}</p>
+                    </div>
                   </div>
-                </div>
-              )
-            })
-          }
+                )
+              })
+            }
+          </div>
         </div>
       )
     }
