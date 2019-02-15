@@ -7,13 +7,14 @@ import Recommend from '../container/Recommend'
 import RankDetail from '../container/RankDetail'
 import Search from '../container/Search'
 import AlbumInfo from '../container/albumInfo'
-import {BrowserRouter as Router,Redirect,Switch,Route} from 'react-router-dom'
+// import {BrowserRouter as Router,Redirect,Switch,Route} from 'react-router-dom'
+import {HashRouter as Router,Redirect,Switch,Route} from 'react-router-dom'
 import Player from '../container/Player'
 
 class App extends Component {
     render() {
       return (
-        <Router>
+        <Router >
           <div className="app">
               <Switch>
                 <Route exact path="/recommend" component={Recommend}/>
